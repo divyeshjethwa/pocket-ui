@@ -4,9 +4,11 @@
 
 **Pocket-sized React Native components, production-ready on every screen.**
 
+**[→ Open the live Storybook](https://pocketui.netlify.app/)**
+
 PocketUI is a library of reusable, responsive React Native components. One TypeScript codebase renders on iOS, Android and the web, and every component is documented in a live Storybook that redeploys automatically on each merge to `main`.
 
-> **Live Storybook:** coming soon (Netlify)
+> **Live Storybook:** [pocketui.netlify.app](https://pocketui.netlify.app/)
 > **Status:** first component (Button) shipped — components land roughly daily.
 
 ## Screenshots
@@ -218,7 +220,7 @@ First run of the story tests locally: `npx playwright install chromium`.
 2. Storybook with docs, viewport, a11y and theme switcher ✅
 3. Button — the first component ✅
 4. CI on every pull request ✅
-5. Automatic deployment to Netlify
+5. Automatic deployment to Netlify ✅
 6. Component generator and daily workflow
 
 ## Licence
