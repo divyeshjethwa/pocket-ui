@@ -5,7 +5,7 @@
 PocketUI is a library of reusable, responsive React Native components. One TypeScript codebase renders on iOS, Android and the web, and every component is documented in a live Storybook that redeploys automatically on each merge to `main`.
 
 > **Live Storybook:** coming soon (Netlify)
-> **Status:** foundation in place — components land roughly daily.
+> **Status:** first component (Button) shipped — components land roughly daily.
 
 ## Screenshots
 
@@ -14,6 +14,14 @@ PocketUI is a library of reusable, responsive React Native components. One TypeS
 </p>
 
 <table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/button-light.png" alt="Button in every variant and size, light theme" /></td>
+    <td width="50%"><img src="docs/screenshots/button-dark.png" alt="Button in every variant and size, dark theme, with frosted glass buttons" /></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>Button</b> — primary, tinted, plain, destructive, glass</sub></td>
+    <td align="center"><sub><b>Dark mode</b> — frosted glass over colour</sub></td>
+  </tr>
   <tr>
     <td width="50%"><img src="docs/screenshots/colors-light.png" alt="Theme colour roles in light mode" /></td>
     <td width="50%"><img src="docs/screenshots/colors-dark-a11y.png" alt="Theme colour roles in dark mode with the accessibility panel showing no violations" /></td>
@@ -35,6 +43,16 @@ PocketUI is a library of reusable, responsive React Native components. One TypeS
 
 PocketUI is a personal project where I build front-end systems the way I would in production: typed component APIs, a token-driven theme, tests for every component, and CI/CD that keeps `main` always deployable.
 
+## Native iOS feel
+
+Components follow Apple's Human Interface Guidelines so they feel at home on iPhone, while still working on Android and the web:
+
+- **Spring press feedback**: a subtle scale and dim on press (Reanimated), instead of a web-style hover or Android ripple
+- **Haptics**: a light tap on press via `expo-haptics` (iOS and Android; off on web)
+- **System font**: SF Pro on Apple devices, Roboto on Android; 17pt body text like iOS
+- **44pt touch targets**, capsule buttons, and a translucent **glass** material inspired by iOS
+- **Respects user settings**: Reduce Motion, Dynamic Type text scaling, and VoiceOver/TalkBack labels and states
+
 ## Stack
 
 | Area       | Choice                                                         |
@@ -43,20 +61,23 @@ PocketUI is a personal project where I build front-end systems the way I would i
 | Components | React Native + `react-native-web`, on Expo SDK 58              |
 | Docs       | Storybook (`@storybook/react-native-web-vite`), autodocs, a11y |
 | Styling    | Design tokens in `src/theme` — light and dark from day one     |
+| Motion     | `react-native-reanimated` springs, `expo-haptics`              |
+| Icons      | [Phosphor](https://phosphoricons.com) (any icon element works) |
 | Testing    | Jest + React Native Testing Library                            |
 | Quality    | ESLint, Prettier, `tsc --noEmit`, enforced in CI               |
 | CI/CD      | GitHub Actions → Netlify                                       |
 
 ## Theme: Electric Midnight
 
-| Token      | Value                                  |
-| ---------- | -------------------------------------- |
-| Primary    | `#5B5BF7` indigo                       |
-| Accent     | `#C6F432` neon lime                    |
-| Background | `#F7F7FB` light / `#0B0B14` dark       |
-| Text       | `#111127` light / `#EDEDF7` dark       |
-| Radius     | 12px, pill buttons                     |
-| Type       | Space Grotesk (headings), Inter (body) |
+| Token      | Value                                                         |
+| ---------- | ------------------------------------------------------------- |
+| Primary    | `#5B5BF7` indigo                                              |
+| Accent     | `#C6F432` neon lime                                           |
+| Background | `#F7F7FB` light / `#0B0B14` dark                              |
+| Text       | `#111127` light / `#EDEDF7` dark                              |
+| Radius     | 12px, pill buttons                                            |
+| Danger     | `#D92D4F` (4.7:1 with white text)                             |
+| Type       | Space Grotesk (headings), system font (body: SF Pro / Roboto) |
 
 Components never hard-code colours or spacing; they read semantic roles from `useTheme()`.
 
@@ -71,7 +92,39 @@ Components never hard-code colours or spacing; they read semantic roles from `us
 
 ### Use PocketUI in a React Native app
 
-Wrap your app once in `ThemeProvider`, then read tokens with `useTheme()`. Components added in later steps (starting with `Button`) are exported from the same entry point.
+Wrap your app once in `ThemeProvider`, then use components and tokens from the same entry point.
+
+```tsx
+import { ArrowRight, Trash } from 'phosphor-react-native';
+import { Button, ThemeProvider } from './src'; // the package entry point once published
+
+export default function Checkout() {
+  return (
+    <ThemeProvider>
+      <Button rightIcon={<ArrowRight />} onPress={pay} fullWidth size="lg">
+        Pay now
+      </Button>
+      <Button variant="secondary" onPress={saveForLater}>
+        Save for later
+      </Button>
+      <Button variant="destructive" leftIcon={<Trash />} loading={isDeleting} onPress={remove}>
+        Remove
+      </Button>
+    </ThemeProvider>
+  );
+}
+```
+
+| Prop                     | Values                                                    | Default   |
+| ------------------------ | --------------------------------------------------------- | --------- |
+| `variant`                | `primary` `secondary` `ghost` `destructive` `glass`       | `primary` |
+| `size`                   | `sm` (34pt, 44pt touch area) `md` (44pt) `lg` (50pt)      | `md`      |
+| `loading` / `disabled`   | Spinner and busy state / dimmed; both block presses       | `false`   |
+| `leftIcon` / `rightIcon` | Any icon element; colour, size and weight are set for you | —         |
+| `fullWidth`              | Stretch to the container width                            | `false`   |
+| `haptics`                | Light haptic tap on press (native only)                   | `true`    |
+
+Build your own components on the same tokens with `useTheme()`:
 
 ```tsx
 import { Text, View } from 'react-native';
@@ -117,6 +170,8 @@ The script builds the static Storybook, captures each view with headless Chrome 
 src/
   components/       # one folder per component: Component.tsx, .stories.tsx, .test.tsx, index.ts
   theme/            # tokens, light/dark themes, ThemeProvider + useTheme
+  hooks/            # shared hooks (e.g. keyboard-only focus rings)
+  platform/         # native vs web implementations (haptics, blur)
   index.ts          # public exports
 .storybook/         # Storybook config
 .github/workflows/  # CI and deploy pipelines
@@ -133,6 +188,7 @@ npm install
 npm run storybook    # Storybook at http://localhost:6006
 npm run build-storybook  # static build in storybook-static/
 npm run web          # run the Expo app in the browser
+npm test             # Jest + React Native Testing Library
 npm run lint         # ESLint
 npm run typecheck    # TypeScript, no emit
 npm run format       # Prettier
@@ -143,7 +199,7 @@ npm run screenshots  # regenerate README screenshots
 
 1. Repo foundation — TypeScript, linting, theme tokens ✅
 2. Storybook with docs, viewport, a11y and theme switcher ✅
-3. Button — the first component
+3. Button — the first component ✅
 4. CI on every pull request
 5. Automatic deployment to Netlify
 6. Component generator and daily workflow

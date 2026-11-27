@@ -36,6 +36,8 @@ chrome() {
 # name | Storybook query
 SHOTS=(
   "welcome|path=/docs/welcome--docs"
+  "button-light|path=/story/components-button--all-variants&globals=theme:light&panel=false"
+  "button-dark|path=/story/components-button--all-variants&globals=theme:dark&panel=false"
   "colors-light|path=/story/foundations-colors--semantic-roles&globals=theme:light&panel=false"
   "colors-dark-a11y|path=/story/foundations-colors--semantic-roles&globals=theme:dark&addonPanel=storybook/a11y/panel"
   "mobile-dark|path=/story/foundations-colors--semantic-roles&globals=theme:dark;viewport:mobile&panel=false"

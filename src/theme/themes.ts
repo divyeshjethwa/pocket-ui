@@ -1,9 +1,11 @@
 import {
+  disabledOpacity,
   fontFamilies,
   fontSizes,
   fontWeights,
   lineHeights,
   minTouchTarget,
+  motion,
   palette,
   radii,
   spacing,
@@ -23,8 +25,15 @@ export interface ThemeColors {
   onPrimary: string;
   accent: string;
   onAccent: string;
+  /** Low-emphasis fill tinted with the primary colour (iOS "tinted" button). */
+  primaryTint: string;
+  /** Text and icons on `primaryTint` or on a plain background (ghost). */
+  onPrimaryTint: string;
   danger: string;
   onDanger: string;
+  /** Translucent fill layered over the blur for glass surfaces. */
+  glassFill: string;
+  glassBorder: string;
   focusRing: string;
 }
 
@@ -40,6 +49,8 @@ export interface Theme {
     lineHeights: typeof lineHeights;
   };
   minTouchTarget: number;
+  motion: typeof motion;
+  disabledOpacity: number;
 }
 
 const shared = {
@@ -52,6 +63,8 @@ const shared = {
     lineHeights,
   },
   minTouchTarget,
+  motion,
+  disabledOpacity,
 };
 
 export const lightTheme: Theme = {
@@ -67,8 +80,12 @@ export const lightTheme: Theme = {
     onPrimary: palette.white,
     accent: palette.lime400,
     onAccent: palette.ink900,
-    danger: palette.red500,
+    primaryTint: 'rgba(91, 91, 247, 0.12)',
+    onPrimaryTint: palette.indigo600,
+    danger: palette.red600,
     onDanger: palette.white,
+    glassFill: 'rgba(255, 255, 255, 0.55)',
+    glassBorder: 'rgba(255, 255, 255, 0.7)',
     focusRing: palette.indigo400,
   },
   ...shared,
@@ -87,8 +104,12 @@ export const darkTheme: Theme = {
     onPrimary: palette.white,
     accent: palette.lime400,
     onAccent: palette.ink900,
-    danger: palette.red500,
+    primaryTint: 'rgba(91, 91, 247, 0.2)',
+    onPrimaryTint: palette.indigo300,
+    danger: palette.red600,
     onDanger: palette.white,
+    glassFill: 'rgba(255, 255, 255, 0.12)',
+    glassBorder: 'rgba(255, 255, 255, 0.22)',
     focusRing: palette.lime400,
   },
   ...shared,
