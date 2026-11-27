@@ -33,7 +33,7 @@ PocketUI is a library of reusable, responsive React Native components. One TypeS
 
 ## Why this repo exists
 
-PocketUI is a portfolio project that demonstrates how I build front-end systems: typed component APIs, a token-driven theme, tests for every component, and CI/CD that keeps `main` always deployable.
+PocketUI is a personal project where I build front-end systems the way I would in production: typed component APIs, a token-driven theme, tests for every component, and CI/CD that keeps `main` always deployable.
 
 ## Stack
 
