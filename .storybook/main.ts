@@ -12,6 +12,7 @@ const config: StorybookConfig = {
   },
   core: {
     disableTelemetry: true,
+    disableWhatsNewNotifications: true,
   },
   features: {
     // Hide Storybook's own "Get started" checklist on the public site.

@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   card: {
-    width: 160,
+    // Two cards fit per row on a 375pt phone.
+    width: 148,
     borderWidth: 1,
     overflow: 'hidden',
   },
