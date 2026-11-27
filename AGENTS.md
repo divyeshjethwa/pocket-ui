@@ -2,6 +2,7 @@
 
 PocketUI is a React Native component library shown in a web Storybook (`react-native-web`) and deployed to Netlify. It does not use Expo Router; `App.tsx` is only a small on-device preview.
 
+- Start new components with `npm run new:component <Name>` (scaffolds files, export and changelog entry).
 - Components live in `src/components/<Name>/` with `<Name>.tsx`, `<Name>.stories.tsx`, `<Name>.test.tsx` and `index.ts`.
 - Style only through theme tokens (`useTheme()` from `src/theme`); never hard-code colours, spacing or fonts.
 - Export every public component from `src/index.ts`.
