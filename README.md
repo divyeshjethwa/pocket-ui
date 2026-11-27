@@ -54,6 +54,8 @@ Requires Node.js 24 (see `.nvmrc`).
 
 ```bash
 npm install
+npm run storybook    # Storybook at http://localhost:6006
+npm run build-storybook  # static build in storybook-static/
 npm run web          # run the Expo app in the browser
 npm run lint         # ESLint
 npm run typecheck    # TypeScript, no emit
@@ -63,7 +65,7 @@ npm run format       # Prettier
 ## Roadmap
 
 1. Repo foundation — TypeScript, linting, theme tokens ✅
-2. Storybook with docs, viewport, a11y and theme switcher
+2. Storybook with docs, viewport, a11y and theme switcher ✅
 3. Button — the first component
 4. CI on every pull request
 5. Automatic deployment to Netlify
