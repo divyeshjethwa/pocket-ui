@@ -11,7 +11,7 @@ OUT="$ROOT/docs/screenshots"
 TMP="$(mktemp -d)"
 PORT="${PORT:-6007}"
 CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
-ADDRESS="${ADDRESS:-localhost:6006}"
+ADDRESS="${ADDRESS:-pocketui.netlify.app}"
 
 cleanup() {
   if [[ -n "${SERVER_PID:-}" ]]; then

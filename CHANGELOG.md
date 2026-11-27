@@ -9,6 +9,7 @@ All notable changes to PocketUI are recorded here. The format follows [Keep a Ch
 - GitHub Actions CI on every pull request and push to `main`: quality (lint, typecheck, Prettier), unit tests, story tests and Storybook build.
 - Story tests (`npm run test:stories`): every story rendered in headless Chromium with axe accessibility checks, in light and dark, via `@storybook/addon-vitest`.
 - CI badge in the README.
+- Live Storybook at https://pocketui.netlify.app/ with link-preview meta tags (title, description, image).
 - Netlify deployment config (`netlify.toml`): build command, publish folder, security headers, long-term caching for hashed assets, and skipped builds for docs-only changes.
 - **Button** component: `primary`, `secondary` (iOS tinted), `ghost`, `destructive` and `glass` variants; `sm`, `md` and `lg` sizes; `loading`, `disabled`, `leftIcon`, `rightIcon`, `fullWidth` and `haptics` props.
 - iOS-style press feedback: Reanimated spring scale and dim, light haptic tap, Reduce Motion support.
