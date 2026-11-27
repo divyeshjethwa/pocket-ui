@@ -6,7 +6,7 @@ PocketUI is a React Native component library shown in a web Storybook (`react-na
 - Style only through theme tokens (`useTheme()` from `src/theme`); never hard-code colours, spacing or fonts.
 - Export every public component from `src/index.ts`.
 - Native-only modules (haptics, blur, anything using `expo-modules-core`) go behind a wrapper in `src/platform/` with a `.web.tsx` fallback; the Storybook web build can't bundle them.
-- Before declaring work done: `npm test` as well.
+- Before declaring work done: `npm test` and `npm run test:stories` (story render + a11y, light and dark) as well.
 - Before declaring work done: `npm run lint`, `npm run typecheck`, `npm run format:check`.
 
 This is an Expo/React Native mobile application. Prioritize mobile-first patterns, performance, and cross-platform compatibility.

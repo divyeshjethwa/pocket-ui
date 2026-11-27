@@ -1,5 +1,7 @@
 # PocketUI
 
+[![CI](https://github.com/divyeshjethwa/pocket-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/divyeshjethwa/pocket-ui/actions/workflows/ci.yml)
+
 **Pocket-sized React Native components, production-ready on every screen.**
 
 PocketUI is a library of reusable, responsive React Native components. One TypeScript codebase renders on iOS, Android and the web, and every component is documented in a live Storybook that redeploys automatically on each merge to `main`.
@@ -55,17 +57,18 @@ Components follow Apple's Human Interface Guidelines so they feel at home on iPh
 
 ## Stack
 
-| Area       | Choice                                                         |
-| ---------- | -------------------------------------------------------------- |
-| Language   | TypeScript (strict)                                            |
-| Components | React Native + `react-native-web`, on Expo SDK 58              |
-| Docs       | Storybook (`@storybook/react-native-web-vite`), autodocs, a11y |
-| Styling    | Design tokens in `src/theme` — light and dark from day one     |
-| Motion     | `react-native-reanimated` springs, `expo-haptics`              |
-| Icons      | [Phosphor](https://phosphoricons.com) (any icon element works) |
-| Testing    | Jest + React Native Testing Library                            |
-| Quality    | ESLint, Prettier, `tsc --noEmit`, enforced in CI               |
-| CI/CD      | GitHub Actions → Netlify                                       |
+| Area       | Choice                                                          |
+| ---------- | --------------------------------------------------------------- |
+| Language   | TypeScript (strict)                                             |
+| Components | React Native + `react-native-web`, on Expo SDK 58               |
+| Docs       | Storybook (`@storybook/react-native-web-vite`), autodocs, a11y  |
+| Styling    | Design tokens in `src/theme` — light and dark from day one      |
+| Motion     | `react-native-reanimated` springs, `expo-haptics`               |
+| Icons      | [Phosphor](https://phosphoricons.com) (any icon element works)  |
+| Testing    | Jest + React Native Testing Library                             |
+| Quality    | ESLint, Prettier, `tsc --noEmit`, enforced in CI                |
+| a11y tests | Every story rendered in Chromium (Vitest + axe), light and dark |
+| CI/CD      | GitHub Actions → Netlify                                        |
 
 ## Theme: Electric Midnight
 
@@ -189,18 +192,32 @@ npm run storybook    # Storybook at http://localhost:6006
 npm run build-storybook  # static build in storybook-static/
 npm run web          # run the Expo app in the browser
 npm test             # Jest + React Native Testing Library
+npm run test:stories # every story in headless Chromium, a11y checked, light + dark
 npm run lint         # ESLint
 npm run typecheck    # TypeScript, no emit
 npm run format       # Prettier
 npm run screenshots  # regenerate README screenshots
 ```
 
+## Continuous integration
+
+Every pull request runs four GitHub Actions checks in parallel; all must pass before merging:
+
+| Check           | What it does                                                                                         |
+| --------------- | ---------------------------------------------------------------------------------------------------- |
+| **Quality**     | ESLint, TypeScript (`tsc --noEmit`), Prettier                                                        |
+| **Unit tests**  | Jest + React Native Testing Library                                                                  |
+| **Story tests** | Renders every story in headless Chromium and fails on any accessibility violation, in light and dark |
+| **Storybook**   | Builds the static Storybook and attaches it to the run                                               |
+
+First run of the story tests locally: `npx playwright install chromium`.
+
 ## Roadmap
 
 1. Repo foundation — TypeScript, linting, theme tokens ✅
 2. Storybook with docs, viewport, a11y and theme switcher ✅
 3. Button — the first component ✅
-4. CI on every pull request
+4. CI on every pull request ✅
 5. Automatic deployment to Netlify
 6. Component generator and daily workflow
 

@@ -2,7 +2,12 @@ import type { StorybookConfig } from '@storybook/react-native-web-vite';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
-  addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-themes'],
+  addons: [
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y',
+    '@storybook/addon-themes',
+    '@storybook/addon-vitest',
+  ],
   framework: {
     name: '@storybook/react-native-web-vite',
     options: {

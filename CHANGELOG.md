@@ -6,6 +6,9 @@ All notable changes to PocketUI are recorded here. The format follows [Keep a Ch
 
 ### Added
 
+- GitHub Actions CI on every pull request and push to `main`: quality (lint, typecheck, Prettier), unit tests, story tests and Storybook build.
+- Story tests (`npm run test:stories`): every story rendered in headless Chromium with axe accessibility checks, in light and dark, via `@storybook/addon-vitest`.
+- CI badge in the README.
 - **Button** component: `primary`, `secondary` (iOS tinted), `ghost`, `destructive` and `glass` variants; `sm`, `md` and `lg` sizes; `loading`, `disabled`, `leftIcon`, `rightIcon`, `fullWidth` and `haptics` props.
 - iOS-style press feedback: Reanimated spring scale and dim, light haptic tap, Reduce Motion support.
 - Keyboard-only focus ring on web (`useFocusVisible`).
