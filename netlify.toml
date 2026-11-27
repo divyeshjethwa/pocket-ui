@@ -1,0 +1,38 @@
+# Netlify builds and hosts the PocketUI Storybook.
+# Production deploys on every push to `main`; every pull request gets a Deploy Preview.
+# Node version comes from .nvmrc (24).
+
+[build]
+  command = "npm run build-storybook"
+  publish = "storybook-static"
+
+  # Skip the build when a change can't affect the site (docs, changelog, CI config).
+  # Exit 0 = skip, non-zero = build. Always build when there's no previous build to compare with.
+  ignore = """
+    [ -z "$CACHED_COMMIT_REF" ] || [ "$CACHED_COMMIT_REF" = "$COMMIT_REF" ] && exit 1
+    git diff --quiet "$CACHED_COMMIT_REF" "$COMMIT_REF" -- . \
+      ':(exclude)README.md' ':(exclude)CHANGELOG.md' ':(exclude)AGENTS.md' \
+      ':(exclude)docs/' ':(exclude).github/'
+  """
+
+[build.environment]
+  # Telemetry off for the build, matching .storybook/main.ts.
+  STORYBOOK_DISABLE_TELEMETRY = "1"
+
+# Security headers for every page.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Storybook renders stories in a same-origin iframe; no one else may frame the site.
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+# Vite's content-hashed bundles never change, so they can be cached for a year.
+# Everything else (HTML, index.json, Storybook's un-hashed manager files) keeps
+# Netlify's default: always revalidated, so new deploys show up immediately.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
