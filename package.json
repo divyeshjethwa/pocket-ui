@@ -56,7 +56,8 @@
     "screenshots": "bash scripts/screenshots/capture.sh",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:stories": "vitest run"
+    "test:stories": "vitest run",
+    "new:component": "node scripts/new-component.mjs"
   },
   "private": true,
   "description": "Pocket-sized React Native components, production-ready on every screen.",

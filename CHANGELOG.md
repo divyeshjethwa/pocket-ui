@@ -6,6 +6,8 @@ All notable changes to PocketUI are recorded here. The format follows [Keep a Ch
 
 ### Added
 
+- Component generator: `npm run new:component <Name>` scaffolds the component, story, test and index, exports it and notes it here.
+- Pull request template with the definition-of-done checklist.
 - GitHub Actions CI on every pull request and push to `main`: quality (lint, typecheck, Prettier), unit tests, story tests and Storybook build.
 - Story tests (`npm run test:stories`): every story rendered in headless Chromium with axe accessibility checks, in light and dark, via `@storybook/addon-vitest`.
 - CI badge in the README.

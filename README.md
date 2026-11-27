@@ -180,7 +180,7 @@ src/
   index.ts          # public exports
 .storybook/         # Storybook config
 .github/workflows/  # CI and deploy pipelines
-scripts/            # screenshot capture, component generator
+scripts/            # component generator, screenshot capture
 docs/screenshots/   # README images
 ```
 
@@ -199,7 +199,24 @@ npm run lint         # ESLint
 npm run typecheck    # TypeScript, no emit
 npm run format       # Prettier
 npm run screenshots  # regenerate README screenshots
+npm run new:component <Name>  # scaffold a new component
 ```
+
+## Adding a component
+
+The daily routine for a new component:
+
+```bash
+git switch main && git pull
+git switch -c feat/card
+npm run new:component Card     # creates src/components/Card/ with component, story, test and index;
+                               # exports it from src/index.ts and adds a CHANGELOG line
+npm run storybook              # build it out with live reload
+npm test && npm run test:stories
+git push -u origin feat/card   # open a PR: the template has the definition-of-done checklist
+```
+
+CI must pass before the PR can merge, Netlify posts a Deploy Preview, and merging deploys the live site.
 
 ## Continuous integration
 
@@ -221,7 +238,7 @@ First run of the story tests locally: `npx playwright install chromium`.
 3. Button — the first component ✅
 4. CI on every pull request ✅
 5. Automatic deployment to Netlify ✅
-6. Component generator and daily workflow
+6. Component generator and daily workflow ✅
 
 ## Licence
 
