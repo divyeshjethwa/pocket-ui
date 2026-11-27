@@ -1,0 +1,118 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome" />
+
+export const c = {
+  midnight: '#0B0B14',
+  surface: '#15152A',
+  border: '#22223D',
+  indigo: '#5B5BF7',
+  lime: '#C6F432',
+  text: '#EDEDF7',
+  muted: '#B4B4CC',
+};
+
+export const heading = { fontFamily: '"Space Grotesk", system-ui, sans-serif' };
+
+export const Pill = ({ children }) => (
+  <span
+    style={{
+      display: 'inline-block',
+      padding: '6px 14px',
+      margin: '0 8px 8px 0',
+      borderRadius: 9999,
+      border: `1px solid ${c.border}`,
+      background: c.surface,
+      color: c.text,
+      fontSize: 14,
+    }}
+  >
+    {children}
+  </span>
+);
+
+export const LinkButton = ({ href, primary, children }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noreferrer"
+    style={{
+      display: 'inline-block',
+      padding: '12px 22px',
+      margin: '0 12px 12px 0',
+      borderRadius: 9999,
+      fontWeight: 600,
+      textDecoration: 'none',
+      background: primary ? c.lime : 'transparent',
+      color: primary ? c.midnight : c.text,
+      border: primary ? 'none' : `1px solid ${c.indigo}`,
+    }}
+  >
+    {children}
+  </a>
+);
+
+<Unstyled>
+  <div
+    style={{
+      background: `radial-gradient(1200px 400px at 0% 0%, rgba(91,91,247,0.35), transparent), ${c.midnight}`,
+      color: c.text,
+      borderRadius: 20,
+      padding: '48px 40px',
+      border: `1px solid ${c.border}`,
+    }}
+  >
+    <p style={{ color: c.lime, letterSpacing: 2, fontSize: 13, fontWeight: 600, margin: 0 }}>
+      REACT NATIVE · WEB · iOS · ANDROID
+    </p>
+    <h1 style={{ ...heading, fontSize: 56, lineHeight: 1.05, margin: '16px 0', color: c.text }}>
+      Pocket<span style={{ color: c.lime }}>UI</span>
+    </h1>
+    <p style={{ fontSize: 22, lineHeight: 1.4, maxWidth: 640, margin: '0 0 28px', color: c.text }}>
+      Pocket-sized React Native components, production-ready on every screen.
+    </p>
+    <div>
+      <LinkButton href="https://divyeshbuilds.netlify.app/" primary>
+        Portfolio
+      </LinkButton>
+      <LinkButton href="https://github.com/divyeshjethwa/pocket-ui">GitHub</LinkButton>
+      <LinkButton href="https://www.linkedin.com/in/divyeshjethwa">LinkedIn</LinkButton>
+    </div>
+    <p style={{ color: c.muted, margin: '20px 0 0', fontSize: 15 }}>
+      Designed and built by <strong style={{ color: c.text }}>Divyesh Jethwa</strong>, full-stack
+      software engineer.
+    </p>
+  </div>
+</Unstyled>
+
+<h2 style={heading}>What this is</h2>
+
+PocketUI is a library of reusable, responsive React Native components. One typed codebase renders on iOS, Android and the web through `react-native-web`, and this Storybook redeploys automatically on every merge to `main`.
+
+Every component ships with:
+
+- **Typed props** with JSDoc, shown in the Docs tab
+- **A story for every variant and state**
+- **Unit tests** with React Native Testing Library
+- **Accessibility checks** in the a11y panel
+- **Light and dark mode**, driven entirely by theme tokens
+
+<h2 style={heading}>Built with</h2>
+
+<div style={{ marginTop: 12 }}>
+  <Pill>TypeScript (strict)</Pill>
+  <Pill>React Native</Pill>
+  <Pill>Expo SDK 58</Pill>
+  <Pill>react-native-web</Pill>
+  <Pill>Storybook 10</Pill>
+  <Pill>Jest + RNTL</Pill>
+  <Pill>ESLint + Prettier</Pill>
+  <Pill>GitHub Actions</Pill>
+  <Pill>Netlify</Pill>
+</div>
+
+<h2 style={heading}>Explore</h2>
+
+- Use the **theme** button in the toolbar to switch between light and dark.
+- Use the **viewport** button to preview mobile, tablet and desktop widths.
+- Open the **Accessibility** panel under any story to see its a11y checks.
