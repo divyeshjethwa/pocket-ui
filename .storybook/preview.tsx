@@ -37,9 +37,17 @@ function StorybookThemeProvider({
   );
 }
 
+/**
+ * Set by vitest.config.ts so the story tests run once per theme.
+ * Undefined in the normal Storybook, which defaults to light.
+ */
+declare const __POCKET_TEST_THEME__: ColorScheme | undefined;
+const testTheme: ColorScheme | undefined =
+  typeof __POCKET_TEST_THEME__ === 'undefined' ? undefined : __POCKET_TEST_THEME__;
+
 const withPocketTheme: Decorator = withThemeFromJSXProvider({
   themes: { light: themes.light, dark: themes.dark },
-  defaultTheme: 'light',
+  defaultTheme: testTheme ?? 'light',
   Provider: StorybookThemeProvider,
 });
 
